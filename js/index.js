@@ -203,7 +203,8 @@ layui.use('layer', function() {
       btn: false,
       skin: 'chat_modal_wrap',
       moveType: 1,
-      area: ['815px', '550px'],
+      move: '.user_info',
+      area: ['750px', '550px'],
       content: modalDom()
     });
     modalClick({ $ })
