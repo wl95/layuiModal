@@ -9,12 +9,33 @@
   <link rel="stylesheet" href="./layui/css/layui.css" />
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/index.css" />
+  <link rel="stylesheet" href="./css/index.css" />
+
 </head>
 
 <body>
-  <script src="./layui/layui.js"></script>
-  <script src="./jq/jquery-2.0.0.min.js"></script>
-  <script src="./js/index.js"></script>
+  <script>
+    // layui.use('table', function () {
+    //   var table = layui.table;
+    //   //第一个实例
+    //   table.render({
+    //     elem: '#demo'
+    //     , height: 312
+    //     // , url: '/demo/table/user/' //数据接口
+    //     // , page: true //开启分页
+    //     , cols: [[ //表头
+    //       { field: 'action', title: '出发地-目的地', width: 150 }
+    //       , { field: 'detail', title: '货车及用车详情', width: 150 }
+    //       , { field: 'tel', title: '手机号码', width: 100 }
+    //       , { field: 'price', title: '客户出价', width: 100 }
+    //       , { field: 'time', title: '处理日期及状态', width: 130 }
+    //       , { field: 'person', title: '操作人', width: 140 }
+    //     ]]
+    //   });
+    // });
+  </script>
+
+
   <div class="open_chat">
     <button type="button" class="layui-btn">聊天弹出</button>
   </div>
@@ -52,13 +73,13 @@
           </div>
           <div class="layui-form-item user_select">
             <div class="fl user_select_item">
-              <select lay-filter="aihao">
+              <select name="interest" lay-filter="aihao">
                 <option value="0">货主</option>
                 <option value="1">车主</option>
               </select>
             </div>
             <div class="fl user_select_item">
-              <select lay-filter="aihao">
+              <select name="interest1" lay-filter="aihao">
                 <option value="0">A1</option>
                 <option value="1">A2</option>
                 <option value="1">C1</option>
@@ -166,7 +187,7 @@
           <button type="button" class="layui-btn">关闭</button>
           <div class="layui-btn-group">
             <button type="button" class="layui-btn">发送</button>
-            <button type="button" class="layui-btn layui-btn-xs btn-icon"> 
+            <button type="button" class="layui-btn layui-btn-xs btn-icon">
               <i class="layui-icon layui-icon-triangle-d"></i>
             </button>
           </div>
@@ -175,6 +196,124 @@
     </div>
     <div class="layui-icon layui-icon-close close_modal"></div>
   </div>
+
+  <!-- <div class="chat_model_right" style="height:550px; width: 780px;">
+    <div class="chat_model_table">
+      <form class="layui-form model_table_form" action="">
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <img src="./img/zu.png" alt="" style="width: 28px;">
+          </div>
+          <div class="layui-inline" id="cascader">
+            <input type="text" name="addres" required="" lay-verify="required" placeholder="请选择装货地址" autocomplete="off"
+              class="layui-input" style="width: 170px;">
+          </div>
+          <div class="layui-inline">
+            <input type="text" name="asd" required="" lay-verify="required" placeholder="请输入装货详细地址" autocomplete="off"
+              class="layui-input" style="width: 340px;">
+          </div>
+          <div class="layui-inline">
+            <input type="text" name="fff" required="" lay-verify="required" placeholder="联系人及联系方式" autocomplete="off"
+              class="layui-input" style="width: 170px;">
+          </div>
+          <div class="layui-inline">
+            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="height: 38px; width: 38px;">
+              <i class="layui-icon"></i>
+            </button>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <img src="./img/red.png" alt="" style="width: 28px;margin: 0;">
+          </div>
+          <div class="layui-inline" id="cascader1">
+            <input type="text" name="sss" required="" lay-verify="required" placeholder="请选择卸货地址" autocomplete="off"
+              class="layui-input" style="width: 170px;">
+          </div>
+          <div class="layui-inline">
+            <input type="text" name="wws" required="" lay-verify="required" placeholder="请输入卸货详细地址" autocomplete="off"
+              class="layui-input" style="width: 340px;">
+          </div>
+          <div class="layui-inline">
+            <input type="text" name="fd" required="" lay-verify="required" placeholder="联系人及联系方式" autocomplete="off"
+              class="layui-input" style="width: 170px;">
+          </div>
+          <div class="layui-inline">
+            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="height: 38px; width: 38px;">
+              <i class="layui-icon"></i>
+            </button>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <input type="text" name="ws" required="" lay-verify="required" placeholder="请输入标题" autocomplete="off"
+              class="layui-input" style="width: 200px;">
+          </div>
+          <div class="layui-inline">
+            <input type="text" name="ew" required="" lay-verify="required" placeholder="请输入标题" autocomplete="off"
+              class="layui-input" style="width: 555px;">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class=" layui-inline all">
+            <div class="tag tag1 layui-inline">历史</div>
+            <div class="tag tag1 layui-inline">司机报价</div>
+            客户： <input type="text" placeholder="报价">
+            预算： <input type="text" placeholder="报价">
+          </div>
+          <div class="layui-inline" style="width: 120px;">
+            <select name="city" lay-verify="required">
+              <option value=""></option>
+              <option value="0">北京</option>
+              <option value="1">上海</option>
+              <option value="2">广州</option>
+              <option value="3">深圳</option>
+              <option value="4">杭州</option>
+            </select>
+          </div>
+          <div class="layui-inline" style="width: 230px;">
+            <input type="text" class="layui-input" id="goods-laydate" placeholder="年-月-日">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline" style="width: 120px;">
+            <select name="city" lay-verify="required">
+              <option value=""></option>
+              <option value="0">北京</option>
+              <option value="1">上海</option>
+              <option value="2">广州</option>
+              <option value="3">深圳</option>
+              <option value="4">杭州</option>
+            </select>
+          </div>
+          <div class="tag tag2 layui-inline">标签</div>
+          <div class="layui-inline">
+            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入标题" autocomplete="off"
+              class="layui-input" style="width: 226px;">
+          </div>
+          <div class="layui-inline">
+            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入标题" autocomplete="off"
+              class="layui-input" style="width: 180px;">
+          </div>
+          <div class="layui-inline">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" style="width:90px" id="supply_save">保存</button>
+          </div>
+          <div class="layui-inline">
+            <button type="reset"  class="layui-btn layui-btn-primary layui-border-blue" style="width:90px">清空</button>
+          </div>
+
+        </div>
+
+      </form>
+      <table id="demo" lay-filter="test"></table>
+ 		</div>
+  </div> -->
+	<script src="./layui/layui.js"></script>
+  <script src="./jq/jquery-2.0.0.min.js"></script>
+  <script src="./js/index.js"></script>
+	<script src="./js/cascader/jquery.min.js"></script>
+	<script src="./js/city.js"></script>
+	<script src="./js/cascader/index.js"></script>
 </body>
 
 </html>

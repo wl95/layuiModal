@@ -2,6 +2,7 @@
   width: 815px;
   height: 550px;
   position: relative;
+  float: left;
 }
 
 .chat_modal_wrap .layui-layer-content {
@@ -121,7 +122,6 @@
 }
 
 .user_info {
-  overflow: hidden;
   padding-left: 8px;
   height: 64px;
   background-color: antiquewhite;
@@ -144,6 +144,7 @@
 
 .user_info .user_data {
   float: left;
+	width: calc(100% - 45px);
 }
 
 .user_info .user_data .layui-form-item {
@@ -306,8 +307,17 @@
   box-sizing: border-box;
 }
 
-.layui-form select {
-  display: inline-block;
+.user_info .user_select_item .layui-form-select{
+	width: 100px;
+	height: 24px;
+	line-height: 24px;
+}
+.user_info .user_select_item .layui-form-select .layui-input{
+	height: 24px;
+	line-height: 24px;
+}
+.user_info .user_select_item .layui-form-select .layui-anim-upbit{
+	top: 24px;
 }
 
 .chat_conver_opera {
@@ -405,4 +415,46 @@
   top: 10px;
   cursor: pointer;
   font-weight: bold;
+}
+
+.chat_model_right{
+	overflow-x: hidden;
+	overflow-y: scroll;
+  float: left;
+}
+
+.chat_model_table>form>div{
+  margin: 3px 0;
+}
+
+.layui-inline{
+  margin-right: 0 !important;
+}
+.all{
+  height: 36px;
+  width: 400px;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+}
+.all>input{
+  line-height: 34px;
+  outline: none;
+  border: none;
+  width: 90px;
+}
+
+.model_table_form{
+	border: 1px solid #e6e6e6;
+	border-bottom: none;
+}
+
+.model_table_form .layui-form-item{
+	padding: 0 6px;
+}
+
+.chat_model_table .layui-table-view{
+ margin: 0;
+}
+.model_table_form .layui-form-item:last-child {
+  margin-bottom: 0;
 }
