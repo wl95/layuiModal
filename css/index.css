@@ -2,6 +2,7 @@
   width: 815px;
   height: 550px;
   position: relative;
+  float: left;
 }
 
 .chat_modal_wrap .layui-layer-content {
@@ -121,7 +122,6 @@
 }
 
 .user_info {
-  overflow: hidden;
   padding-left: 8px;
   height: 64px;
   background-color: antiquewhite;
@@ -144,6 +144,7 @@
 
 .user_info .user_data {
   float: left;
+	width: calc(100% - 45px);
 }
 
 .user_info .user_data .layui-form-item {
@@ -217,7 +218,7 @@
 }
 
 .user_select .user_select_item:nth-child(4) {
-  margin-left: 16px;
+  margin-left: 6px;
   color: rgb(163, 162, 162);
 }
 
@@ -306,8 +307,43 @@
   box-sizing: border-box;
 }
 
-.layui-form select {
+.user_info .user_select_item .layui-form-select{
+	height: 24px;
+	line-height: 24px;
+  font-size: 12px;
+}
+.user_info .user_select_item .layui-form-select:nth-child(2){
+	margin-left: 4px;
+}
+.user_info .user_select_item .layui-form-select:nth-child(1),
+.user_info .user_select_item .layui-form-select:nth-child(2){
+  width: 64px;
+}
+.user_info .user_select_item .layui-form-select:nth-child(1)  input,
+.user_info .user_select_item .layui-form-select:nth-child(2) input{
+  width: 70px;
+	transform: scale(0.8);
+}
+.user_info .user_select_item:nth-child(3),
+.user_info .user_select_item:nth-child(4)  {
+  width: 29%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.user_info .user_select_item:nth-child(4)  {
+  width: 35%;
+}
+.user_info .user_select_item:nth-child(3) span,
+.user_info .user_select_item:nth-child(4) span {
   display: inline-block;
+}
+.user_info .user_select_item .layui-form-select .layui-input{
+	height: 24px;
+	line-height: 24px;
+}
+.user_info .user_select_item .layui-form-select .layui-anim-upbit{
+	top: 24px;
 }
 
 .chat_conver_opera {
@@ -405,4 +441,121 @@
   top: 10px;
   cursor: pointer;
   font-weight: bold;
+}
+
+.chat_model_right{
+	overflow-x: hidden;
+	overflow-y: scroll;
+  float: left;
+}
+
+.chat_model_table>form>div{
+  margin: 3px 0;
+  font-size: 12px;
+}
+
+.chat_model_table .layui-input{
+  height: 26px;
+  font-size: 12px;
+}
+
+.chat_model_table .layui-btn-sm{
+  line-height: 22px;
+  padding: 0;
+  text-align: center;
+}
+
+.chat_model_table .layui-btn .layui-icon{
+  margin-right: 0;
+  font-size: 14px !important;
+}
+
+.stockgood_info .article{
+  width: 30%;
+}
+
+.stockgood_info .article2{
+  width: 68%;
+}
+
+.stockgood_item .address{
+  width: 25%;
+}
+
+.stockgood_item .addressDetail{
+  width: 29%;
+}
+
+.stockgood_item .contact_contact_way{
+  width: 29%;
+}
+
+.layui-inline{
+  margin-right: 0 !important;
+}
+.all{
+  height: 26px;
+  width: 52%;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  float: left;
+  display: flex;
+  align-items: center;
+}
+.all>input{
+  line-height: 26px;
+  outline: none;
+  border: none;
+  width: 18%;
+  font-size: 12px;
+}
+.all-select{
+  width: 20%;
+  float: left;
+  margin-left: .5%;
+}
+.all-period{
+  width: 25%;
+  float: left;
+  margin-left: .5%;
+}
+
+.chat_remark .remark_select{
+  width: 20%;
+}
+.chat_remark .client_remark_select{
+  width: 23%;
+}
+.chat_remark .my_remark_select{
+  width: 23%;
+}
+.chat_remark .chat_remark_savebtn button,.chat_remark .chat_remark_resetbtn button{
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+}
+
+.chat_model_right .layui-form-select .layui-edge{
+  border-width: 5px;
+}
+
+.model_table_form{
+	border: 1px solid #e6e6e6;
+	border-bottom: none;
+}
+
+.model_table_form .layui-form-item{
+	padding: 0 6px;
+}
+
+.chat_model_table .layui-table-view{
+ margin: 0;
+}
+.model_table_form .layui-form-item:last-child {
+  margin-bottom: 0;
+}
+
+.table_wrap{
+  width: 100%;
+  padding-left: 6px;
 }
