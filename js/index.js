@@ -58,14 +58,14 @@ function modalDom () {
 		</div>
 	</div>
 	<div class="tab_select">
-		<span class="select_tab" data-type="1">微信聊天</span>
-		<span data-type="2">网络采集记录</span>
-		<span data-type="3">通话记录</span>
-		<span data-type="4">联系人及备注</span>
-		<span data-type="5">企业详情</span>
-		<span data-type="6">客户营销</span>
-		<span data-type="7">货源录入</span>
-		<span data-type="8">操作日志</span>
+    <span class="select_tab" data-type="1">微信聊天</span>
+    <span data-type="2">网络采集记录<i data-modal-type="2" class="layui-icon layui-icon-templeate-1"></i></span>
+    <span data-type="3">通话记录<i data-modal-type="3" class="layui-icon layui-icon-templeate-1"></i></span>
+    <span data-type="4">联系人及备注<i data-modal-type="4" class="layui-icon layui-icon-templeate-1"></i></span>
+    <span data-type="5">企业详情<i data-modal-type="5" class="layui-icon layui-icon-templeate-1"></i></span>
+    <span data-type="6">客户营销<i data-modal-type="6" class="layui-icon layui-icon-templeate-1"></i></span>
+    <span data-type="7">货源录入<i data-modal-type="7" class="layui-icon layui-icon-templeate-1"></i></span>
+    <span data-type="8">操作日志<i data-modal-type="8" class="layui-icon layui-icon-templeate-1"></i></span>
 	</div>
 	<div class="friend_chat">
 		<div class="friend_chat_item friend_chat_port">
@@ -543,28 +543,40 @@ let list = [
 
 function modalClick ({ $, layer }) {
 	let layer_modal = null
-	$(".tab_select span").on('click', function () {
-		var othis = $(this),
-			type = othis.data('type');
-		if(type === 7){
-			console.log(layer)
-			layer_modal = layer.open({
-				title: false,
-				closeBtn: false,
-				btn: false,
-				offset: '100px',
-				tipsMore: true,
-				// move : '.user_info',
-				// skin: 'chat_modal_wrap',
-				moveType: 1,
-				area: ["32%", '550px'],
-				success: function(layero, index){
+  $(".tab_select span").on('click', function () {
+  	var othis = $(this),
+  		type = othis.data('type');
+  	if(type === 7){
+  		console.log(layer)
+  		layer_modal = layer.open({
+        type: 1,
+  			title: false,
+  			closeBtn: false,
+  			btn: false,
+  			offset: '100px',
+        tipsMore: true,
+        zIndex: layer.zIndex,
+  			// move : '.user_info',
+  			// skin: 'chat_modal_wrap',
+  			moveType: 1,
+  			area: ["32%", '550px'],
+  			success: function(layero, index){
+          layer.setTop();
+  			},
+  			content: supplyGoodsDom()
+  		});
+    }
+  })
+  $(".tab_select span i").on('click', function (e) {
+    e.stopPropagation();
+    var othis = $(this),
+      modalType = othis.data('modal-type');
+    console.log(modalType)
+    if (modalType === 7) {
 
-				},
-				content: supplyGoodsDom()
-			});
-		}
-	})
+    }
+    return false
+  })
 	$(".chat_left_friend .frends").on('click', function (e) {
 		var othis = $(this)
 		e.stopPropagation()
@@ -601,15 +613,19 @@ layui.use(['form', 'layedit', 'laydate', 'layer', 'table'], function () {
 	// close_modal = $(".close_modal")
 	$(".open_chat").on('click', function () {
 		chat_modal = layer.open({
-			title: false,
+      title: false,
+      type: 1,
 			closeBtn: false,
 			btn: false,
 			// move : '.user_info',
 			skin: 'chat_modal_wrap',
 			moveType: 1,
-			area: ["50%", '550px'],
+      area: ["50%", '550px'],
+      zIndex: layer.zIndex,
 			tipsMore: true,
 			success: function(layero, index){
+        console.log(layer)
+        layer.setTop(layero);
 				// 重新渲染弹层中的下拉选择框select
 				form.render('select');
 				modalClick({ $, layer })

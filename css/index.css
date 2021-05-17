@@ -10,7 +10,7 @@
 }
 
 .chat_left {
-  width: 24%;
+  width: 20%;
   height: 100%;
   padding: 6px;
   overflow-x: hidden;
@@ -20,7 +20,7 @@
 }
 
 .chat_right {
-  width: 75.8%;
+  width: 79.8%;
   overflow: hidden;
   display: flex;
   height: 100%;
@@ -213,7 +213,7 @@
 }
 
 .user_select .user_select_item:nth-child(3) {
-  margin-left: 8px;
+  margin-left: 4px;
   color: rgb(163, 162, 162);
 }
 
@@ -225,7 +225,7 @@
 .tab_select {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 8px;
   background-color: #fff;
   box-shadow: 0px 1px 8px #aaa;
   padding-right: 4px;
@@ -236,7 +236,7 @@
 }
 
 .tab_select span {
-  padding: 0 10px;
+  padding: 0 4px;
   display: inline-block;
 }
 
@@ -245,7 +245,9 @@
   background-color: #1E9FFF;
   color: #fff;
 }
-
+.tab_select span i:hover{
+  color: rgb(19, 204, 142);
+}
 .friend_chat {
   padding-top: 8px;
   flex: 1;
@@ -312,17 +314,20 @@
 	line-height: 24px;
   font-size: 12px;
 }
-.user_info .user_select_item .layui-form-select:nth-child(2){
-	margin-left: 4px;
-}
 .user_info .user_select_item .layui-form-select:nth-child(1),
 .user_info .user_select_item .layui-form-select:nth-child(2){
-  width: 64px;
+  width: 62px;
 }
-.user_info .user_select_item .layui-form-select:nth-child(1)  input,
-.user_info .user_select_item .layui-form-select:nth-child(2) input{
-  width: 70px;
-	transform: scale(0.8);
+.user_info .user_select_item .layui-form-select:nth-child(1) .layui-input,
+.user_info .user_select_item .layui-form-select:nth-child(2) .layui-input{
+  padding-right: 21px;
+}
+.user_info .user_select_item:nth-child(2){
+  margin-left: 4px;
+}
+.user_info .user_select_item .layui-form-select:nth-child(1) .layui-edge,
+.user_info .user_select_item .layui-form-select:nth-child(2) .layui-edge{
+  font-size: 10px;
 }
 .user_info .user_select_item:nth-child(3),
 .user_info .user_select_item:nth-child(4)  {
