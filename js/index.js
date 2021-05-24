@@ -21,15 +21,14 @@ function modalDom () {
 </div>
 <div class="fl chat_right">
 	<div class="user_info">
-		<div class="fl user_head_port">
-			<img src="./img/free_stock_photo.jpg" />
-		</div>
 		<div class="fl layui-form user_data">
 			<div class="layui-form-item layui-form-text user_data_info">
 				<div class="fl user_name">李明东</div>
 				<div class="fl user_company">建筑木材有限公司</div>
-				<div class="fl user_phone"><input type="text" placeholder="请输入手机号" lay-verify="phone"></div>
-				<div class="fl user_submit"><button class="layui-btn" lay-submit>完成</button></div>
+				<div class="fl user_update_phone">
+					<div class="fl user_phone">17610003123</div>
+					<div class="fl user_submit">(本次来电)</div>
+				</div>
 			</div>
 			<div class="layui-form-item user_select">
 				<div class="fl user_select_item">
@@ -56,6 +55,7 @@ function modalDom () {
 				</div>
 			</div>
 		</div>
+		<div class="chat_user_move"></div>
 	</div>
 	<div class="tab_select">
     <span class="select_tab" data-type="1">微信聊天</span>
@@ -540,41 +540,102 @@ let list = [
 	},
 	{ value: 1, label: 'xxx' },
 ];
-
-function modalClick ({ $, layer }) {
-	let layer_modal = null
+let openModal = {}
+let modelPosType = []
+function modalClick ({ $, layer, form, table, chatOffset, chatWidth, chatHeight, isMove }) {
+	if(isMove) return
+	let layer_modal = {}
   $(".tab_select span").on('click', function () {
   	var othis = $(this),
   		type = othis.data('type');
-  	if(type === 7){
-  		console.log(layer)
-  		layer_modal = layer.open({
+		if (type === 7) {
+			openModal[`${type}Right`] = !openModal[`${type}Right`]
+  		openModal[`${type}Right`] ? (layer_modal[`${type}Right`] = layer.open({
         type: 1,
   			title: false,
   			closeBtn: false,
   			btn: false,
-  			offset: '100px',
         tipsMore: true,
         zIndex: layer.zIndex,
+				shade: false,
+				offset: [chatOffset.top, chatOffset.left+chatWidth],
+				skin: 'supply_of_goods',
+				id: 'supply_of_goods',
   			// move : '.user_info',
   			// skin: 'chat_modal_wrap',
   			moveType: 1,
   			area: ["32%", '550px'],
-  			success: function(layero, index){
-          layer.setTop();
+				success: function (layero, index) {
+					// 重新渲染弹层中的下拉选择框select
+					form.render('select');
+					table.render({
+						elem: '#chat-table',
+						height: 312,
+						width: $('#chat_model_table').width(),
+						// , url: '/demo/table/user/' //数据接口
+						// , page: true //开启分页
+						cols: [
+							[ //表头
+							{ field: 'action', title: '出发地-目的地', width: 150 },
+								{ field: 'detail', title: '货车及用车详情', width: 150 },
+								{ field: 'tel', title: '手机号码', width: 100 },
+								{ field: 'price', title: '客户出价', width: 100 },
+								{ field: 'time', title: '处理日期及状态' },
+								{ field: 'person', title: '操作人', fixed: 'right', width: 140 }
+							]
+						]
+					});
   			},
   			content: supplyGoodsDom()
-  		});
-    }
+			})) : layer.close(layer_modal[`${type}Right`])
+			console.log(chatOffset, layer_modal)
+		}
+		modelPosType[0] = 'right'
   })
   $(".tab_select span i").on('click', function (e) {
     e.stopPropagation();
     var othis = $(this),
       modalType = othis.data('modal-type');
-    console.log(modalType)
-    if (modalType === 7) {
-
-    }
+		if (modalType === 7) {
+			openModal[`${modalType}Bottom`] = !openModal[`${modalType}Bottom`]
+			openModal[`${modalType}Bottom`] ? (layer_modal[`${modalType}Bottom`] = layer.open({
+        type: 1,
+  			title: false,
+  			closeBtn: false,
+  			btn: false,
+        tipsMore: true,
+				id: 'supply_of_goods_top',
+        zIndex: layer.zIndex,
+				shade: false,
+				offset: [chatOffset.top+chatHeight, chatOffset.left],
+				skin: 'supply_of_goods_top',
+  			moveType: 1,
+  			area: ["32%", '550px'],
+				success: function (layero, index) {
+					// 重新渲染弹层中的下拉选择框select
+					form.render('select');
+					table.render({
+						elem: '#chat-table',
+						height: 312,
+						width: $('#chat_model_table').width(),
+						// , url: '/demo/table/user/' //数据接口
+						// , page: true //开启分页
+						cols: [
+							[ //表头
+							{ field: 'action', title: '出发地-目的地', width: 150 },
+								{ field: 'detail', title: '货车及用车详情', width: 150 },
+								{ field: 'tel', title: '手机号码', width: 100 },
+								{ field: 'price', title: '客户出价', width: 100 },
+								{ field: 'time', title: '处理日期及状态' },
+								{ field: 'person', title: '操作人', fixed: 'right', width: 140 }
+							]
+						]
+					});
+  			},
+  			content: supplyGoodsDom()
+  		})) : layer.close(layer_modal[`${modalType}Bottom`])
+		}
+		modelPosType[1] = 'top'
     return false
   })
 	$(".chat_left_friend .frends").on('click', function (e) {
@@ -596,11 +657,12 @@ function modalClick ({ $, layer }) {
 
 layui.use(['form', 'layedit', 'laydate', 'layer', 'table'], function () {
 	let chat_modal = null
+	let chatDom = null
 	var $ = layui.jquery
 	var table = layui.table
 	var layer = layui.layer
 	var form = layui.form
-	modalClick({ $, layer })
+	// modalClick({ $, layer, form, table })
 	// chat_modal = layer.open({
 	//   title: false,
 	//   closeBtn: false,
@@ -617,19 +679,41 @@ layui.use(['form', 'layedit', 'laydate', 'layer', 'table'], function () {
       type: 1,
 			closeBtn: false,
 			btn: false,
+			id: 'chat_modal_wrap',
 			// move : '.user_info',
 			skin: 'chat_modal_wrap',
 			moveType: 1,
       area: ["50%", '550px'],
-      zIndex: layer.zIndex,
+			zIndex: layer.zIndex,
+			offset: ['auto', '100px'],
+			shade: false,
+			move: '.chat_user_move',
+			resizing (layero) {
+				console.log(layero)
+			},
+			onMove (offset, layero) {
+				chatDom = $(layero.selector)
+				let offsetPosRight = modelPosType.includes('right') && {
+					left: offset.left + chatDom.width(),
+					top: offset.top
+				}
+				let offsetPosTop = {
+					left: offset.left,
+					top: offset.top + chatDom.height()
+				}
+				modelPosType.includes('right') && $('.supply_of_goods').css(offsetPosRight)
+				modelPosType.includes('top') && $('.supply_of_goods_top').css(offsetPosTop)
+				modalClick({ $, layer, form, table, chatOffset: offset, chatWidth: chatDom.width(), chatHeight: chatDom.height(), isMove: true })
+			},
 			tipsMore: true,
-			success: function(layero, index){
-        console.log(layer)
-        layer.setTop(layero);
-				// 重新渲染弹层中的下拉选择框select
+			success: function (layero, index) {
+				chatDom = $(layero.selector)
+				layer.setTop(layero);
 				form.render('select');
-				modalClick({ $, layer })
+				console.log(chatDom)
+				modalClick({ $, layer, form, table, chatOffset: chatDom.offset(), chatWidth: chatDom.width(), chatHeight: chatDom.height() })
 				$(".close_modal").on('click', function () {
+					modelPosType = []
 					layer.closeAll()
 				})
 				$(".chat_left_friend .frends").on('click', function () {
@@ -637,21 +721,9 @@ layui.use(['form', 'layedit', 'laydate', 'layer', 'table'], function () {
 					othis.siblings().removeClass('select_friends');
 					othis.addClass('select_friends')
 				})
-				table.render({
-					elem: '#chat-table'
-					, height: 312,
-					width: $('#chat_model_table').width() * 0.962
-					// , url: '/demo/table/user/' //数据接口
-					// , page: true //开启分页
-					, cols: [[ //表头
-						{ field: 'action', title: '出发地-目的地', width: 150 }
-						, { field: 'detail', title: '货车及用车详情', width: 150 }
-						, { field: 'tel', title: '手机号码', width: 100 }
-						, { field: 'price', title: '客户出价', width: 100 }
-						, { field: 'time', title: '处理日期及状态', width: 130 }
-						, { field: 'person', title: '操作人', width: 140 }
-					]]
-				});
+				$(".user_update_phone").on('click', function () {
+					console.log('修改手机号')
+				})
 				form.on('submit(formDemo)', function (data) {
 					layer.msg(JSON.stringify(data.field));
 					return false;
@@ -670,7 +742,6 @@ layui.use(['form', 'layedit', 'laydate', 'layer', 'table'], function () {
 						console.log('你选择了', val);
 					},
 				});
-				console.log(cas)
 				$('#cascader input').on('focus', function () {
 					console.log('你选择了', 'cascader');
 					xcas.popClose()
